@@ -32,7 +32,7 @@ function run_Main()
 	# Create a script to log into PRoot as the 'user' account (which we will create later)
 	echo >> launch_anbox86-64.sh "#!/bin/bash"
 	echo >> launch_anbox86-64.sh ""
-	echo >> launch_anbox86-64.sh "proot-distro login --bind /system/ --bind /data/data/com.termux/files/usr/bin --bind /data/data/com.termux/files/usr/libexec/termux-am --isolated --shared-tmp debian -- su - user" # '--isolated' avoids program conflicts between Termux & PRoot (credits: Mipster)
+	echo >> launch_anbox86-64.sh "proot-distro login --bind /system/ --bind /data/data/com.termux/files/ --bind /data/data/com.termux/files/usr/libexec/termux-am --isolated --shared-tmp debian -- su - user" # '--isolated' avoids program conflicts between Termux & PRoot (credits: Mipster)
 	chmod +x launch_anbox86-64.sh
 	
 	# Inject a 'second stage' installer script into Debian
@@ -92,15 +92,15 @@ function run_InjectSecondStageInstaller()
 				# Box86/box64 binaries are from GitHub "Actions" build artifacts, linked to via www.nightly.link
 				# TODO: Add error checking and compile is link is broken
 				sudo apt install p7zip-full wget git -y
-				wget https://nightly.link/ptitSeb/box64/actions/artifacts/148608519.zip #box64 (RPI4ARM64)
-				wget https://nightly.link/ptitSeb/box86/actions/artifacts/148607181.zip #box86 (RPI4ARM64)
-				7z x 148608519.zip -o"/usr/local/bin/" #extract box64 to /usr/local/bin/box64
-				7z x 148607181.zip -o"/usr/local/bin/" #extract box86 to /usr/local/bin/box86
+				wget https://nightly.link/ptitSeb/box64/actions/artifacts/194101077.zip #box64 (RPI4ARM64)
+				wget https://nightly.link/ptitSeb/box86/actions/artifacts/189500087.zip #box86 (RPI4ARM64)
+				7z x 194101077.zip -o"/usr/local/bin/" #extract box64 to /usr/local/bin/box64
+				7z x 189500087.zip -o"/usr/local/bin/" #extract box86 to /usr/local/bin/box86
 				sudo chmod +x /usr/local/bin/box64 /usr/local/bin/box86 #make the extracted files executable
 				# Also install extra box86 i386 & box64 x86_64 libraries
 				git clone https://github.com/ptitSeb/box64.git; mkdir -p /usr/lib/x86_64-linux-gnu/ && cp box64/x64lib/* /usr/lib/x86_64-linux-gnu/
 				git clone https://github.com/ptitSeb/box86.git; mkdir -p /usr/lib/i386-linux-gnu/ && cp box86/x86lib/* /usr/lib/i386-linux-gnu/
-				rm -rf box64/ box86/ 148608519.zip 148607181.zip
+				rm -rf box64/ box86/ 194101077.zip 189500087.zip
 			
 			# Install amd64-wine (64-bit) and i386-wine (32-bit)
 			#TODO: Go through this dependencies list and weed out un-needed libraries.
