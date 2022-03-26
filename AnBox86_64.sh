@@ -124,7 +124,7 @@ function run_InjectSecondStageInstaller()
 				# Wine download links from WineHQ: https://dl.winehq.org/wine-builds/
 				# TODO: Update wine to 6.0 or higher - check box86 compatability
 				branch="devel"
-				version="5.22"
+				version="5.7"
 				dist="bullseye"
 				tag="-1"
 				LNK1="https://dl.winehq.org/wine-builds/debian/dists/bullseye/main/binary-amd64/"
